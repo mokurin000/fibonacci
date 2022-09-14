@@ -51,6 +51,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
 
+      - name: Install GMP on windows
+        shell: bash
+        run: |
+          if [[ ${{ matrix.platform }} == "windows-x86_64" ]]
+          then vcpkg install gmp:x64-windows
+          fi
+
+
       - name: Run code build
         uses: actions-rs/cargo@v1
         with:
