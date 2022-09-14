@@ -1,12 +1,13 @@
 use clap::Parser;
-use fibonacci::fib;
 use fibonacci::IndexType;
+use fibonacci::{_fib, fib};
 
 fn main() {
     let Args {
         n,
         r: range,
         print_result,
+        no_parralel,
     } = Args::parse();
 
     match (n, range) {
@@ -27,14 +28,15 @@ fn main() {
                 }
             }) {
                 for i in r {
+                    let result = if no_parralel { _fib(i) } else { fib(i) };
                     if print_result {
-                        println!("{i}: {}", fib(i));
+                        println!("{i}: {result}");
                     }
                 }
             }
         }
         (Some(n), _) => {
-            let result = fib(n);
+            let result = if no_parralel { _fib(n) } else { fib(n) };
             if print_result {
                 println!("{result}");
             }
@@ -63,4 +65,8 @@ struct Args {
     /// whether should we print the result or only perform calculation.
     #[clap(short = 'p', long = "print", value_parser)]
     print_result: bool,
+
+    /// if you set this, we will not use multithread process.
+    #[clap(short = 'p', long = "print", value_parser)]
+    no_parralel: bool,
 }
