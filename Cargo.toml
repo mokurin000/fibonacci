@@ -5,8 +5,15 @@ edition = "2021"
 license = "MIT"
 repository = "https://github.com/poly000/fibonacci"
 authors = ["poly000"]
+description = "fast high precision fibonacci calculator using rayon and gmp"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "fibonacci"
+
+[[bin]]
+name = "fibonacci"
 
 [dependencies]
 rayon = "1.5.3"

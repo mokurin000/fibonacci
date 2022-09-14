@@ -1,11 +1,25 @@
 # fibonacci
 
-simple concurrent & blazingly fast high precision fibonacci calculate program.
+simple concurrent & blazingly fast high precision fibonacci calculator.
 
 thanks to rayon's `join` and `rust-gmp`'s thread safe gmp wrapper.
 
-# TODO
+## Usage
 
-[] better range parsing using nom
+```bash
+$ fibonacci -r 1..=3,5
+1: 1
+2: 1
+3: 2
+5: 5
+$ fibonacci -n 114
+298611126818977066918552
+$ fibonacci --help
+...
+```
 
-[] memorize optimization for range caculate (Fn = Fn-1 + Fn-2)
+## TODO
+
+[ ] graceful range parse by nom
+
+[ ] memorize optimization for range caculate

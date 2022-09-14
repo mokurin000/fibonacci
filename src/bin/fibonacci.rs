@@ -1,4 +1,4 @@
-use fibnacci::fib;
+use fibonacci::fib;
 use gmp::mpz::Mpz;
 
 use clap::Parser;
