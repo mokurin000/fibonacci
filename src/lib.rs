@@ -1,4 +1,4 @@
-pub type IndexType = u64;
+pub type IndexType = u64; // this is currently much larger than your mem/cpu limitation
 
 use std::ops::Mul;
 
