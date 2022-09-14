@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        platform: [macos-x86_64, linux_glibc-x86_64, linux_musl-x86_64, windows-x86_64]
+        platform: [macos-x86_64, linux_glibc-x86_64, linux_musl-x86_64]
         include:
         
           - platform: macos-x86_64
@@ -30,11 +30,6 @@ jobs:
             os: ubuntu-latest
             bin: fibonacci
         
-          - platform: windows-x86_64
-            target: x86_64-pc-windows-msvc
-            os: windows-latest
-            bin: fibonacci.exe
-            
     steps:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
@@ -45,14 +40,6 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v1
-
-      - name: Install GMP on windows
-        shell: bash
-        run: |
-          if [[ ${{ matrix.platform }} == "windows-x86_64" ]]
-          then vcpkg install gmp
-          fi
-
 
       - name: Run code build
         uses: actions-rs/cargo@v1
@@ -71,6 +58,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ matrix.target }}.tar
-          tag_name: v0.2.0
+          tag_name: v0.3.0
           prerelease: true
 

@@ -1,15 +1,20 @@
-use fibonacci::fib;
-use gmp::mpz::Mpz;
-
 use clap::Parser;
+use fibonacci::fib;
+use fibonacci::IndexType;
 
 fn main() {
-    let Args { n, r: range } = Args::parse();
+    let Args {
+        n,
+        r: range,
+        print_result,
+    } = Args::parse();
 
     match (n, range) {
         (_, Some(pat)) => {
             for r in pat.split(",").map(|s| {
-                if s.is_empty() {return 1..=0}
+                if s.is_empty() {
+                    return 1..=0;
+                }
 
                 if s.contains("..=") {
                     let mut split = s.split("..=");
@@ -17,17 +22,24 @@ fn main() {
                     let r = split.next().unwrap().parse().unwrap();
                     l..=r
                 } else {
-                    let n: u64 = s.parse().unwrap();
+                    let n: IndexType = s.parse().unwrap();
                     n..=n
                 }
             }) {
                 for i in r {
-                    println!("{i}: {}", fib(i));
+                    if print_result {
+                        println!("{i}: {}", fib(i));
+                    }
                 }
             }
         }
-        (Some(n), _) => println!("{}", fib(n)),
-        (_, _) => eprintln!("you should provide either n or r to use me!\n")
+        (Some(n), _) => {
+            let result = fib(n);
+            if print_result {
+                println!("{result}");
+            }
+        }
+        (_, _) => eprintln!("you should provide either n or r to use me!\n"),
     }
 }
 
@@ -35,9 +47,9 @@ fn main() {
 #[clap(author, version, about, long_about = None)]
 struct Args {
     /// specify to calculate Fib[n].
-    /// n is stored in Mpz.
+    /// n is stored in u64.
     #[clap(short, value_parser)]
-    n: Option<Mpz>,
+    n: Option<IndexType>,
 
     /// specify to calculate a range of fibonacci's.
     /// this will override `n`.
@@ -47,4 +59,8 @@ struct Args {
     /// format: index1,index2,start..=end
     #[clap(short, long = "range", value_parser)]
     r: Option<String>,
+
+    /// whether should we print the result or only perform calculation.
+    #[clap(short = 'p', long = "print", value_parser)]
+    print_result: bool,
 }
