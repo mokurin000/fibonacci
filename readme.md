@@ -21,4 +21,3 @@ $ fibonacci --help
 ## TODO
 
 - [ ] graceful range parse by nom
-- [ ] memorize optimization for range caculate
