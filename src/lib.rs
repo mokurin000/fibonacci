@@ -1,3 +1,6 @@
+use cache_macro::cache;
+use lru_cache::LruCache;
+
 pub type IndexType = u64; // this is currently much larger than your mem/cpu limitation
 
 use std::ops::Mul;
@@ -5,7 +8,8 @@ use std::ops::Mul;
 use gmp::mpz::Mpz;
 use rayon::join;
 
-fn _no_parralel_fib(x: IndexType) -> (Mpz, Mpz) {
+#[cache(LruCache : LruCache::new(1000000))]
+fn no_parralel_fib(x: IndexType) -> (Mpz, Mpz) {
     if x < 3 {
         (Mpz::from(0), Mpz::from(1))
     } else {
@@ -21,7 +25,7 @@ fn _no_parralel_fib(x: IndexType) -> (Mpz, Mpz) {
 }
 
 pub fn _fib(x: IndexType) -> Mpz {
-    let (a, b) = _no_parralel_fib(x);
+    let (a, b) = no_parralel_fib(x);
     a + b
 }
 

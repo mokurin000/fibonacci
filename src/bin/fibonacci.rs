@@ -7,7 +7,7 @@ fn main() {
         n,
         r: range,
         print_result,
-        no_parralel,
+        lru_cache: no_parralel,
     } = Args::parse();
 
     match (n, range) {
@@ -66,7 +66,7 @@ struct Args {
     #[clap(short = 'p', long = "print", value_parser)]
     print_result: bool,
 
-    /// if you set this, we will not use multithread process.
-    #[clap(short = 'p', long = "print", value_parser)]
-    no_parralel: bool,
+    /// lru_cache version
+    #[clap(long, value_parser)]
+    lru_cache: bool,
 }
