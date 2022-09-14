@@ -1,6 +1,6 @@
 [package]
 name = "fibnacci"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/poly000/fibonacci"
@@ -19,9 +19,6 @@ name = "fibonacci"
 rayon = "1.5.3"
 rust-gmp = "0.5.0"
 clap = { version = "3.2.20", features = ["derive"] }
-cache-macro = "0.4.1"
-lru-cache = "0.1.2"
-lazy_static = "1.4.0"
 
 [profile.release]
 panic = "abort"
