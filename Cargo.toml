@@ -1,6 +1,6 @@
 [package]
 name = "fibnacci"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 rayon = "1.5.3"
 rust-gmp = "0.5.0"
+clap = { version = "3.2.20", features = ["derive"] }
 
 [profile.release]
 panic = "abort"
