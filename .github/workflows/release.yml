@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           if [[ ${{ matrix.platform }} == "windows-x86_64" ]]
-          then vcpkg install gmp:x64-windows
+          then vcpkg install gmp
           fi
 
 
