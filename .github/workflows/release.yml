@@ -41,6 +41,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
 
+      - name: some tricks for featrues
+        run: export RUSTC_BOOTSTRAP=1
+
       - name: Run code build
         uses: actions-rs/cargo@v1
         with:
