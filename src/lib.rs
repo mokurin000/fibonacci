@@ -8,7 +8,7 @@ use std::ops::Mul;
 use gmp::mpz::Mpz;
 use rayon::join;
 
-#[cache(LruCache : LruCache::new(1000000))]
+#[cache(LruCache : LruCache::new(1145141919))]
 fn no_parralel_fib(x: IndexType) -> (Mpz, Mpz) {
     if x < 3 {
         (Mpz::from(0), Mpz::from(1))
