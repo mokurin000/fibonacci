@@ -12,13 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        platform: [macos-x86_64, linux_glibc-x86_64, linux_musl-x86_64]
+        platform: [linux_glibc-x86_64, linux_musl-x86_64]
         include:
-        
-          - platform: macos-x86_64
-            target: x86_64-apple-darwin
-            os: macos-latest
-            bin: fibonacci
 
           - platform: linux_glibc-x86_64
             target: x86_64-unknown-linux-gnu
@@ -40,9 +35,13 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v1
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update 
+          sudo apt-get upgrade
+          sudo apt-get install libgmp-dev
 
-      - name: some tricks for featrues
-        run: export RUSTC_BOOTSTRAP=1
 
       - name: Run code build
         uses: actions-rs/cargo@v1
